@@ -5,7 +5,7 @@ RUN apk add build-base
 WORKDIR /build
 COPY http-infinite-zero.cpp /build/
 
-RUN g++ -o http-infinite-zero -DPORT="80" -DBUFFER_SIZE="4*1024*1024" -O3 http-infinite-zero.cpp
+RUN g++ -o http-infinite-zero -DPORT="80" -DBUFFER_SIZE="4*1024*1024" -O3 -march=tigerlake http-infinite-zero.cpp
 
 FROM alpine:latest
 
