@@ -1,7 +1,15 @@
-FROM python:3-alpine
+FROM alpine:latest AS BUILD
 
-WORKDIR /usr/src/app
+RUN apk add build-base
 
-COPY host.py ./
+WORKDIR /build
+COPY http-infinite-zero.cpp /build/
 
-CMD [ "python", "./host.py" ]
+RUN g++ -o http-infinite-zero -DPORT="80" -DBUFFER_SIZE="4*1024*1024" -O3 http-infinite-zero.cpp
+
+FROM alpine:latest
+
+WORKDIR /app
+COPY --from=BUILD /build/http-infinite-zero /app/
+
+CMD ["/app/http-infinite-zero"]

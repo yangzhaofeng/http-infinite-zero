@@ -26,7 +26,7 @@ jobs:
       - name: Build Docker image
         run: |
           IMAGE="${{ steps.image-name.outputs.name }}"
-          #docker pull "$IMAGE"
+          docker pull "$IMAGE"
           docker build -t build-image .
       - name: Push to Docker Hub
         if: "github.repository == 'yangzhaofeng/http-infinite-zero'"
