@@ -61,8 +61,8 @@ void handle_client(int client_sock) {
     send(client_sock, headers, strlen(headers), 0);
 
     // Prepare zero buffer
-    char zero_buf[buffer_size];
-    memset(zero_buf, 0, buffer_size);
+    static const char zero_buf[buffer_size]{};
+    //memset(zero_buf, 0, buffer_size);
 
     // Infinite loop sending zeros
     while (true) {
