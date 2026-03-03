@@ -9,6 +9,8 @@ RUN g++ -o http-infinite-zero -DPORT="80" -DBUFFER_SIZE="4*1024*1024" -O3 http-i
 
 FROM alpine:latest
 
+RUN apk update && apk add --no-cache libgcc libstdc++ && rm -rf /var/cache/apk/*
+
 WORKDIR /app
 COPY --from=BUILD /build/http-infinite-zero /app/
 
